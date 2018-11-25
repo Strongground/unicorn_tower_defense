@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SpawnStart.gd" type="Script" id=1]
+[ext_resource path="res://assets/start_flag.png" type="Texture" id=2]
+
+[node name="SpawnStart" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="start_flag" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+

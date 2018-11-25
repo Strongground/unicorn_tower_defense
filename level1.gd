@@ -12,6 +12,9 @@ func _ready():
 	redTurret.setColor(Color(120,0,120))
 	redTurret.set_position(Vector2(300,100))
 	add_child(redTurret)
+	# Monster initial movement
+	for monster in get_tree().get_nodes_in_group("enemy"):
+		monster.move_to($LevelBackdrop/PathFinish.get_global_transform().get_origin())
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

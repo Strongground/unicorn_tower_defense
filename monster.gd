@@ -29,7 +29,7 @@ func _process(delta):
 	
 	if not _state == FOLLOW:
 		return
-	var arrived_to_next_point = move_to(target_point_world)
+	var arrived_to_next_point = _move_to(target_point_world)
 	if arrived_to_next_point:
 		path.remove(0)
 		if len(path) == 0:
@@ -59,7 +59,7 @@ func _change_state(new_state):
 		target_point_world = path[1]
 	_state = new_state
 	
-func move_to(world_position):
+func _move_to(world_position):
 	var MASS = 10.0
 	var ARRIVE_DISTANCE = 10.0
 	var desired_velocity = (world_position - position).normalized() * SPEED
@@ -75,6 +75,10 @@ func _input(event):
 		else:
 			target_position = get_global_mouse_position()
 		_change_state(FOLLOW)
+	
+func move_to(world_position):
+	target_position = world_position
+	_change_state(FOLLOW)
 		
 func _got_hit(body, damage):
 	print("I got hit")
