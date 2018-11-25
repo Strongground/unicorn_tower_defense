@@ -17,6 +17,7 @@ var velocity = Vector2()
 
 func _ready():
 	_change_state(IDLE)
+	connect("hit", self, "_got_hit")
 
 func _process(delta):
 	# update health bars based on internal colour health value
@@ -74,3 +75,6 @@ func _input(event):
 		else:
 			target_position = get_global_mouse_position()
 		_change_state(FOLLOW)
+		
+func _got_hit(body, damage):
+	print("I got hit")
