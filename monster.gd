@@ -4,7 +4,8 @@ extends Node2D
 export var health_red = 255
 export var health_green = 255
 export var health_blue = 255
-export(float) var SPEED = 200.0
+export(float) var SPEED = 10.0
+export var type = "horny"
 
 enum STATES { IDLE, FOLLOW }
 var _state = null
@@ -82,3 +83,9 @@ func move_to(world_position):
 		
 func _got_hit(body, damage):
 	print("I got hit")
+	
+func set_type(type):
+	self.type = type
+
+func set_speed(speed):
+	self.SPEED = speed

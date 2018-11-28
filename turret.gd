@@ -23,7 +23,7 @@ func setColor(c):
 func _shoot():
 	var bullet = bulletScene.instance()
 	var start = self.get_position()
-	var goal = $"/root/game/monster".get_position()
+	var goal = $"/root/game/Monster".get_position()
 	bullet.shoot(start, goal)
 	root.add_child(bullet)
 	
