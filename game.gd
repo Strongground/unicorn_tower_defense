@@ -12,7 +12,7 @@ func _ready():
 	# Initialization here
 	var redTurret = turretScene.instance()
 	redTurret.setColor(Color(120,0,120))
-	redTurret.set_position(Vector2(300,100))
+	redTurret.set_position(Vector2(300,75))
 	add_child(redTurret)
 	# Define waves - do this somewhere else and some other way in the future, so it is tied to the level, not the game
 	# and to allow set details on the individual monsters, like rgb values

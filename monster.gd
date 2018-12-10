@@ -1,5 +1,7 @@
 extends Node2D
 
+signal hit
+
 # public class member variables go here
 export var health_red = 255
 export var health_green = 255
@@ -89,3 +91,10 @@ func set_type(type):
 
 func set_speed(speed):
 	self.SPEED = speed
+
+func _on_body_body_entered(body):
+	print("Monster says: body entered")
+
+
+func _on_body_body_shape_entered(body_id, body, body_shape, local_shape):
+	print("Monster says: body shape entered")

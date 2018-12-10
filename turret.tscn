@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://turret.gd" type="Script" id=1]
-[ext_resource path="res://assets/turret.png" type="Texture" id=2]
+[ext_resource path="res://assets/tower.png" type="Texture" id=2]
 [ext_resource path="res://assets/turret_color.png" type="Texture" id=3]
+[ext_resource path="res://assets/768px-Circle_(transparent).png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 214.503
 
 [node name="Node2D" type="Node2D"]
 
@@ -12,14 +18,50 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="turret" type="Sprite" parent="." index="0"]
 
-position = Vector2( 1.86585, -51.1737 )
+position = Vector2( 0.916412, -21.0827 )
+scale = Vector2( 0.291865, 0.291865 )
 texture = ExtResource( 2 )
 
 [node name="turret_color" type="Sprite" parent="turret" index="0"]
 
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -2.59156, -24.8337 )
+position = Vector2( -4.75078, -187.309 )
+scale = Vector2( 1.6752, 1.6752 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Visibility" ]
+
+[node name="shoot_range" type="Area2D" parent="." index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="range_indicator" type="Sprite" parent="shoot_range" index="0"]
+
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -1.20437, 1.2591 )
+scale = Vector2( 0.564658, 0.564658 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shoot_range" index="1"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="area_entered" from="shoot_range" to="." method="_on_shoot_range_area_entered"]
+
+[connection signal="area_shape_entered" from="shoot_range" to="." method="_on_shoot_range_area_shape_entered"]
+
+[connection signal="body_entered" from="shoot_range" to="." method="_on_shoot_range_body_entered"]
+
+[connection signal="body_shape_entered" from="shoot_range" to="." method="_on_shoot_range_body_shape_entered"]
 
 
