@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/level1.png" type="Texture" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://PathFinish.tscn" type="PackedScene" id=4]
 [ext_resource path="res://DefaultTileset.tres" type="TileSet" id=5]
 [ext_resource path="res://TileMap.gd" type="Script" id=6]
+[ext_resource path="res://turret.tscn" type="PackedScene" id=7]
+[ext_resource path="res://lava_monster.tscn" type="PackedScene" id=8]
+[ext_resource path="res://monster.tscn" type="PackedScene" id=9]
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -58,6 +61,18 @@ process_mode = 1
 wait_time = 1.5
 one_shot = false
 autostart = false
+
+[node name="Node2D" parent="." index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 750.566, 345.535 )
+
+[node name="Node2D2" parent="." index="4" instance=ExtResource( 8 )]
+
+position = Vector2( 571.356, 213.578 )
+
+[node name="Monster" parent="." index="5" instance=ExtResource( 9 )]
+
+position = Vector2( 190.452, 141.479 )
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 

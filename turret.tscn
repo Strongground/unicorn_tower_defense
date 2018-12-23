@@ -56,12 +56,8 @@ _sections_unfolded = [ "Visibility" ]
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="area_entered" from="shoot_range" to="." method="_on_shoot_range_area_entered"]
-
-[connection signal="area_shape_entered" from="shoot_range" to="." method="_on_shoot_range_area_shape_entered"]
-
 [connection signal="body_entered" from="shoot_range" to="." method="_on_shoot_range_body_entered"]
 
-[connection signal="body_shape_entered" from="shoot_range" to="." method="_on_shoot_range_body_shape_entered"]
+[connection signal="body_exited" from="shoot_range" to="." method="_on_shoot_range_body_exited"]
 
 

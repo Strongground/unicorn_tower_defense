@@ -63,12 +63,15 @@ func _change_state(new_state):
 	_state = new_state
 	
 func _move_to(world_position):
-	var MASS = 10.0
+#	var MASS = 10.0
 	var ARRIVE_DISTANCE = 10.0
 	var desired_velocity = (world_position - position).normalized() * SPEED
-	var steering = desired_velocity - velocity
-	velocity += steering / MASS
-	position += velocity * get_process_delta_time()
+	print(desired_velocity)
+#	var steering = desired_velocity - velocity
+#	velocity += steering / MASS
+#	position += velocity * get_process_delta_time()
+#	set_linear_velocity(desired_velocity)
+	set_linear_velocity(Vector2(30,0))
 	return position.distance_to(world_position) < ARRIVE_DISTANCE
 
 func _input(event):
@@ -91,10 +94,3 @@ func set_type(type):
 
 func set_speed(speed):
 	self.SPEED = speed
-
-func _on_body_body_entered(body):
-	print("Monster says: body entered")
-
-
-func _on_body_body_shape_entered(body_id, body, body_shape, local_shape):
-	print("Monster says: body shape entered")
