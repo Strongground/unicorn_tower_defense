@@ -114,15 +114,13 @@ custom_solver_bias = 0.0
 radius = 10.9461
 height = 6.34204
 
-[node name="Monster" type="Node2D" index="0" groups=[
+[node name="Monster" type="Node2D" groups=[
 "enemy",
 ]]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-health_red = 100
-health_green = 100
-health_blue = 100
+health = Color( 1, 1, 1, 1 )
 SPEED = 200.0
 type = "horny"
 
@@ -237,26 +235,12 @@ rounded = true
 percent_visible = false
 _sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_styles" ]
 
-[node name="body" type="RigidBody2D" parent="." index="2"]
+[node name="body" type="KinematicBody2D" parent="." index="2"]
 
 input_pickable = false
 collision_layer = 3
 collision_mask = 3
-mode = 0
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 1.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
+collision/safe_margin = 0.08
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body" index="0"]
@@ -264,9 +248,5 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( 1, 1 )
 shape = SubResource( 6 )
 _sections_unfolded = [ "Transform" ]
-
-[connection signal="body_entered" from="body" to="." method="_on_body_body_entered"]
-
-[connection signal="body_shape_entered" from="body" to="." method="_on_body_body_shape_entered"]
 
 

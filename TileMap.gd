@@ -82,7 +82,7 @@ func astar_connect_walkable_cells_diagonal(points_array):
 					continue
 				if not astar_node.has_point(point_relative_index):
 					continue
-				astar_node.connect_points(point_index, point_relative_index, true)
+				astar_node.connect_points(point_index, point_relative_index, false)
 
 func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
