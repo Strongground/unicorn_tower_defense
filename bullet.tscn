@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://bullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/turret_color.png" type="Texture" id=2]
+[ext_resource path="res://glitzer_particles.tres" type="Material" id=2]
+[ext_resource path="res://assets/glitzer.png" type="Texture" id=3]
+[ext_resource path="res://small_glitzer_particles.tres" type="Material" id=4]
+[ext_resource path="res://assets/small_glitzer.png" type="Texture" id=5]
+[ext_resource path="res://assets/turret_color.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 6.67421
 
-[node name="bullet" type="RigidBody2D" groups=[
+[node name="bullet" type="RigidBody2D" index="0" groups=[
 "bullet",
 ]]
 
@@ -33,27 +37,88 @@ angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="bullet_area_shape" type="CollisionShape2D" parent="." index="0"]
+[node name="glitzer_particles" type="Particles2D" parent="." index="0"]
+
+position = Vector2( -0.0880127, 0.0578899 )
+emitting = true
+amount = 20
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.5
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 2 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 7
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+
+[node name="small_glitzer_particles" type="Particles2D" parent="." index="1"]
+
+position = Vector2( -0.461136, 0.431023 )
+emitting = true
+amount = 30
+lifetime = 0.5
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.5
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 4 )
+texture = ExtResource( 5 )
+normal_map = null
+h_frames = 5
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+
+[node name="bullet_area_shape" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="bullet_color" type="Sprite" parent="." index="1"]
+[node name="bullet_color" type="Sprite" parent="." index="3"]
 
 scale = Vector2( 0.285446, 0.285446 )
-texture = ExtResource( 2 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="bullet_life_time" type="Timer" parent="." index="2"]
+[node name="bullet_life_time" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = true
 autostart = true
 
+[node name="bullet_destroy_delay" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
 
 [connection signal="body_shape_entered" from="." to="." method="_on_bullet_body_shape_entered"]
 
 [connection signal="timeout" from="bullet_life_time" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="bullet_destroy_delay" to="." method="_on_bullet_destroy_delay_timeout"]
 
 

@@ -2,6 +2,8 @@ extends Node2D
 var damage = Color(0,0,0)
 var vel = 150.0
 var parent = null
+var currentPos = Vector2(0,0)
+var keepInPlace = false
 signal hit(body, damage)
 
 func _ready():
@@ -11,7 +13,8 @@ func _ready():
 	self.set_max_contacts_reported(1)
 
 func _fixed_process(delta):
-	pass
+	if keepInPlace:
+		self.set_position(currentPos)
 
 func shoot(start, target):
 	var x = (target - start).normalized()
@@ -19,12 +22,21 @@ func shoot(start, target):
 	set_transform(Transform2D(x,y,start))
 	set_linear_velocity(x*vel)
     
+# hide bullet and remove from group to deactivate monster-hits, start timer
+# to finally trigger removal after short time
 func destroy():
 	#play explosion animation and sound
-	queue_free()
+	var currentPos = self.get_global_transform().get_origin()
+	$bullet_destroy_delay.start()
+	$bullet_color.hide()
+	self.set_contact_monitor(false)
+	self.remove_from_group("bullet")
+	keepInPlace = true
 	
 func set_color(color):
 	$bullet_color.set_modulate(color)
+	$glitzer_particles.set_modulate(color)
+	$small_glitzer_particles.set_modulate(color)
     
 func _on_Timer_timeout():
 	#Destroy after short time in case it never hits anything
@@ -38,3 +50,7 @@ func _on_bullet_body_entered(body):
 		# self.emit_signal("hit", body.get_parent(), self.damage)
 		body.get_parent()._got_hit(self.damage)
 		destroy()
+
+# Allow the particles to decay until the bullet is finally removed from scene
+func _on_bullet_destroy_delay_timeout():
+	queue_free()

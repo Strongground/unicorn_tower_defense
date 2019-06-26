@@ -9,7 +9,7 @@
 [ext_resource path="res://DefaultTileset.tres" type="TileSet" id=7]
 [ext_resource path="res://TileMap.gd" type="Script" id=8]
 
-[node name="game" type="Node2D" index="0"]
+[node name="game" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -54,6 +54,7 @@ color = Color( 0, 0.509804, 0, 1 )
 
 [node name="NavMap" type="TileMap" parent="." index="4"]
 
+visible = false
 mode = 0
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 32, 32 )
