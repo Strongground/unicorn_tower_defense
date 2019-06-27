@@ -32,8 +32,17 @@ func setColor(c):
 func _input(event):
 	pass
 
-func _on_shoot_range_body_entered(body):
-	print("body entered: "+str(body))
+func _on_shoot_range_area_entered(area):
+	print("area entered")
 
-func _on_shoot_range_body_exited(body):
-	print("body exited: "+str(body))
+
+func _on_shoot_range_area_shape_entered(area_id, area, area_shape, self_shape):
+	print("area_shape_entered")
+
+
+func _on_shoot_range_body_entered(body):
+	print("body entered")
+
+
+func _on_shoot_range_body_shape_entered(body_id, body, body_shape, area_shape):
+	print("body shape entered")
