@@ -10,11 +10,13 @@
 custom_solver_bias = 0.0
 radius = 214.503
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+color = Color( 120, 0, 0, 1 )
+firing_range = 100
 
 [node name="turret" type="Sprite" parent="." index="0"]
 
@@ -25,12 +27,13 @@ texture = ExtResource( 2 )
 [node name="turret_color" type="Sprite" parent="turret" index="0"]
 
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -4.75078, -187.309 )
+position = Vector2( -4.75078, -204.44 )
+rotation = 3.14159
 scale = Vector2( 1.6752, 1.6752 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="shoot_range" type="Area2D" parent="." index="1"]
+[node name="range" type="Area2D" parent="." index="1"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -43,7 +46,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
-[node name="range_indicator" type="Sprite" parent="shoot_range" index="0"]
+[node name="range_indicator" type="Sprite" parent="range" index="0"]
 
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -1.20437, 1.2591 )
@@ -51,17 +54,22 @@ scale = Vector2( 0.564658, 0.564658 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shoot_range" index="1"]
+[node name="collision_shape" type="CollisionShape2D" parent="range" index="1"]
 
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="area_entered" from="shoot_range" to="." method="_on_shoot_range_area_entered"]
+[node name="shot_countdown" type="Timer" parent="." index="2"]
 
-[connection signal="area_shape_entered" from="shoot_range" to="." method="_on_shoot_range_area_shape_entered"]
+process_mode = 0
+wait_time = 0.25
+one_shot = false
+autostart = true
 
-[connection signal="body_entered" from="shoot_range" to="." method="_on_shoot_range_body_entered"]
+[connection signal="body_entered" from="range" to="." method="_on_shoot_range_body_entered"]
 
-[connection signal="body_shape_entered" from="shoot_range" to="." method="_on_shoot_range_body_shape_entered"]
+[connection signal="body_exited" from="range" to="." method="_on_range_body_exited"]
+
+[connection signal="timeout" from="shot_countdown" to="." method="_on_shot_countdown_timeout"]
 
 
