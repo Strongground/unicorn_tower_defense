@@ -10,7 +10,7 @@
 custom_solver_bias = 0.0
 radius = 214.503
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
@@ -35,6 +35,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="range" type="Area2D" parent="." index="1"]
 
+visible = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

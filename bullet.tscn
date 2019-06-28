@@ -12,7 +12,7 @@
 custom_solver_bias = 0.0
 radius = 6.67421
 
-[node name="bullet" type="RigidBody2D" index="0" groups=[
+[node name="bullet" type="RigidBody2D" groups=[
 "bullet",
 ]]
 
@@ -39,9 +39,8 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="glitzer_particles" type="Particles2D" parent="." index="0"]
 
-position = Vector2( -0.0880127, 0.0578899 )
 emitting = true
-amount = 20
+amount = 10
 lifetime = 1.0
 one_shot = false
 preprocess = 0.0
@@ -62,9 +61,8 @@ _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Trans
 
 [node name="small_glitzer_particles" type="Particles2D" parent="." index="1"]
 
-position = Vector2( -0.461136, 0.431023 )
 emitting = true
-amount = 30
+amount = 15
 lifetime = 0.5
 one_shot = false
 preprocess = 0.0
